@@ -1,5 +1,5 @@
 module.exports = {
     plugins:[
-        require('autoprefixer')
+        require('autoprefixer')({overrideBrowserslist: ['> 0.15% in CN']})
     ]
 };

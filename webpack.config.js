@@ -41,8 +41,24 @@ module.exports = function(env,argv){
                         }
 
                     }
+                },
+                {
+                    test: /\.(png|svg|jpe?g)$/,
+                    use: [
+                        {
+                            loader: 'url-loader',
+                            options: {
+                                limit: 8192,
+                                name: 'images/[name].[hash:7].[ext]',
+                                publicPath: './'
+                            }
+                        }
+                    ]
+                },
+                {
+                    test: /\.(woff|woff2|eot|ttf|otf)$/,
+                    loader: 'file-loader'
                 }
-
             ]
         },
         plugins: [
@@ -54,57 +70,3 @@ module.exports = function(env,argv){
     }
 }
 
-/*
-const path = require('path');
-const HtmlPlugins = require('html-webpack-plugin');
-
-module.exports = {
-    mode: "development",
-    entry: {
-        index: path.resolve(__dirname, './src/index.js')
-    },
-    output: {
-        path: path.resolve(__dirname, 'dist'),
-        filename: 'bundle.js',
-    },
-    module: {
-        rules: [
-            {
-                test: /\.css$/i, use: [
-                'style-loader',
-                'css-loader',
-                {
-                    loader: 'postcss-loader'
-                }
-            ]
-            },
-            {
-                test: /\.js$/i, use: {
-                loader: "babel-loader",
-                options: {
-                    presets: ['@babel/preset-env']
-                },
-            }
-            },
-            {
-                test: /\.(png|jpg|gif)$/i,
-                use: {
-                    loader: 'url-loader',
-                    options: {
-                        outputPath: 'imgs/',
-                        publicPath: 'dist/imgs/',
-                        limit:4*1024
-                    }
-
-                }
-            }
-
-        ]
-    },
-    plugins: [
-        new HtmlPlugins({
-            template: path.resolve(__dirname, './index.html'),
-        })
-    ]
-};
-*/
